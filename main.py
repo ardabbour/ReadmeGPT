@@ -3,7 +3,8 @@
 import datetime
 import pathlib
 import typing
-import openai
+from openai import OpenAI
+
 
 API_KEY = ""
 MODEL = "gpt-3.5-turbo-16k"  # or gpt-4-32k
@@ -55,8 +56,8 @@ def generate_prompt(
 
 
 def main():
-    openai.api_key = API_KEY
-    response = openai.ChatCompletion.create(
+    client = OpenAI(api_key=API_KEY)
+    response = client.chat.completions.create(
         model=MODEL,
         temperature=TEMPERATURE,
         messages=[
